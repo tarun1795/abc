@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accolite.sleeppods.dao.HotelDao;
 import com.accolite.sleeppods.exception.BadRequestException;
 import com.accolite.sleeppods.model.Hotel;
+import com.accolite.sleeppods.model.Room;
 
 @RestController
 @RequestMapping("hotel")
@@ -33,15 +34,6 @@ public class HotelController {
 		logger.info("Hotel " + hotel.getName() + " Created");
 	}
 
-	@DeleteMapping("{hotelId}")
-	public void removeHotel(@PathVariable int hotelId) {
-		boolean isDone = hotelDao.removeHotel(hotelId);
-		if (!isDone) {
-			throw new BadRequestException("Could not delete the hotel");
-		}
-		logger.info("Hotel with id " + hotelId + " Removed");
-	}
-
 	@GetMapping("all")
 	public List<Hotel> getAllHotels() {
 		List<Hotel> hotels = hotelDao.getAllHotels();
@@ -51,6 +43,15 @@ public class HotelController {
 		return hotels;
 	}
 
+	@GetMapping("{hotelId}/allRooms")
+	public List<Room> getAllRoomsInHotel(@PathVariable int hotelId) {
+		List<Room> rooms = hotelDao.getAllRoomsInHotel(hotelId);
+		if(rooms.isEmpty()) {
+			throw new BadRequestException("Cannot get all rooms from hotel with id "+hotelId);
+		}
+		return rooms;
+	}
+
 	@GetMapping("{hotelId}")
 	public Hotel getDetailsOfHotel(@PathVariable int hotelId) {
 		Hotel hotel = hotelDao.getHotelDetails(hotelId);
@@ -58,5 +59,14 @@ public class HotelController {
 			throw new BadRequestException("Cannot get Hotel with id "+hotelId);
 		}
 		return hotel;
+	}
+	
+	@DeleteMapping("{hotelId}")
+	public void removeHotel(@PathVariable int hotelId) {
+		boolean isDone = hotelDao.removeHotel(hotelId);
+		if (!isDone) {
+			throw new BadRequestException("Could not delete the hotel");
+		}
+		logger.info("Hotel with id " + hotelId + " Removed");
 	}
 }

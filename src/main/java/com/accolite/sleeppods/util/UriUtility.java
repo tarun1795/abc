@@ -14,10 +14,6 @@ public class UriUtility {
 
 	JdbcTemplate jdbcTemplate;
 
-	public void setDataSource(DataSource dataSource) {
-		jdbcTemplate = new JdbcTemplate(dataSource);
-	}
-
 	@Async
 	public void createURI(Integer id, String uri) {
 		// TODO 
@@ -49,5 +45,9 @@ public class UriUtility {
 //			sql = "DELETE FROM USER_PASSWORD_URI WHERE URI=?";
 //		}
 //		jdbcTemplate.update(sql, uri);
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 }

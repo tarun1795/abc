@@ -14,16 +14,6 @@ import com.accolite.sleeppods.util.UriUtility;
 public class UtilityBeans {
 
 	@Bean
-	public UriUtility uriUtil() {
-		return new UriUtility();
-	}
-
-	@Bean
-	public MailUtility mailUtil() {
-		return new MailUtility();
-	}
-
-	@Bean
 	public JavaMailSender mailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setHost("smtp.gmail.com");
@@ -39,5 +29,15 @@ public class UtilityBeans {
 		props.put("mail.debug", "true");
 
 		return mailSender;
+	}
+
+	@Bean
+	public MailUtility mailUtil() {
+		return new MailUtility();
+	}
+
+	@Bean
+	public UriUtility uriUtil() {
+		return new UriUtility();
 	}
 }

@@ -14,15 +14,6 @@ public class HashUtility {
 	private static final String SALT = "dvnewofq0Q!i2i0320_2u4t34jgow@dsmv";
 	/* IMPORTANT* DONT CHANGE THE SALT */
 
-	private HashUtility() {
-
-	}
-
-	public static String hashPassword(String passwordToHash) {
-
-		return generateHash(passwordToHash, SALT);
-	}
-
 	public static String createUniqueUriPath(Integer userId, String userName) {
 		Double number = Math.ceil(Math.random() * 100) * userId;
 		String salt = number.toString();
@@ -49,5 +40,14 @@ public class HashUtility {
 		}
 
 		return generatedPassword;
+	}
+
+	public static String hashPassword(String passwordToHash) {
+
+		return generateHash(passwordToHash, SALT);
+	}
+
+	private HashUtility() {
+
 	}
 }

@@ -2,5 +2,5 @@ projectKey=sleep_pods
 serverUrl=http://localhost:9000
 serverVersion=6.7.1.35068
 dashboardUrl=http://localhost:9000/dashboard/index/sleep_pods
-ceTaskId=AWFHQMOuX5IJ6FT0OzDd
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AWFHQMOuX5IJ6FT0OzDd
+ceTaskId=AWFL64hAWgNrmeytiSPN
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWFL64hAWgNrmeytiSPN

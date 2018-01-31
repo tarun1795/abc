@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,6 +65,26 @@ public class CrewMemberController {
 		if(members.isEmpty()) {
 			throw new BadRequestException("Cannot get all crew members");
 		}
+		logger.info("Returning list of all Crew members");
 		return members;
+	}
+	
+	@GetMapping("{memberId}")
+	public CrewMember getCrewDetails(@PathVariable int memberId) {
+		CrewMember member = crewMemberDao.getCrewDetails(memberId);
+		if(member == null) {
+			throw new BadRequestException("Error getting details of crew member with id "+memberId);
+		}
+		logger.info("Returning details of crew member with id "+memberId);
+		return member;
+	}
+	
+	@DeleteMapping("{memberId}")
+	public void removeCrew(@PathVariable int memberId) {
+		boolean isDone = crewMemberDao.removeCrewMember(memberId);
+		if(!isDone) {
+			throw new BadRequestException("Error deleting crew member with id "+memberId);
+		}
+		logger.info("Deleted crew member with id "+memberId);
 	}
 }

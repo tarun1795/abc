@@ -11,6 +11,7 @@ import com.accolite.sleeppods.model.Hotel;
 public class HotelMapper implements RowMapper<Hotel> {
 
 	private final Logger logger = Logger.getLogger(HotelMapper.class);
+
 	@Override
 	public Hotel mapRow(ResultSet rs, int rowNum) {
 		Hotel hotel = new Hotel();
@@ -21,8 +22,9 @@ public class HotelMapper implements RowMapper<Hotel> {
 			hotel.setPhone(rs.getString("HOTEL_PHONE"));
 			hotel.setLat(rs.getDouble("HOTEL_LAT"));
 			hotel.setLng(rs.getDouble("HOTEL_LNG"));
+			hotel.setCityId(rs.getInt("CITY_ID"));
 		} catch (SQLException e) {
-			logger.error("Cannot Map ResultSet to Hotel",e);
+			logger.error("Cannot Map ResultSet to Hotel", e);
 		}
 		return hotel;
 	}

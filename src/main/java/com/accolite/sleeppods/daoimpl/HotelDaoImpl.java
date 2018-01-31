@@ -10,8 +10,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.accolite.sleeppods.dao.HotelDao;
 import com.accolite.sleeppods.mapper.HotelMapper;
+import com.accolite.sleeppods.mapper.RoomMapper;
 import com.accolite.sleeppods.model.Hotel;
 import com.accolite.sleeppods.model.Room;
+import com.accolite.sleeppods.util.Query;
 
 public class HotelDaoImpl implements HotelDao {
 
@@ -20,17 +22,11 @@ public class HotelDaoImpl implements HotelDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void setDataSource(DataSource dataSource) {
-		jdbcTemplate = new JdbcTemplate(dataSource);
-	}
-
-	@Override
 	public boolean addNewHotel(Hotel hotel) {
-		String addNewHotel = "INSERT INTO HOTEL(HOTEL_NAME,HOTEL_ADDRESS,HOTEL_PHONE,HOTEL_LAT,HOTEL_LNG) VALUES (?,?,?,?,?)";
 		int affectedRows;
 		try {
-			affectedRows = jdbcTemplate.update(addNewHotel, hotel.getName(), hotel.getAddress(), hotel.getPhone(),
-					hotel.getLat(), hotel.getLng());
+			affectedRows = jdbcTemplate.update(Query.ADDNEWHOTEL, hotel.getName(), hotel.getAddress(), hotel.getPhone(),
+					hotel.getLat(), hotel.getLng(), hotel.getCityId());
 		} catch (Exception e) {
 			logger.error("Error creating hotel " + hotel.getName(), e);
 			affectedRows = 0;
@@ -39,23 +35,60 @@ public class HotelDaoImpl implements HotelDao {
 	}
 
 	@Override
-	public boolean addNewRoomToHotel(int hotelId, Room room) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<Hotel> getAllHotels() {
+		logger.info("Getting all hotel list");
+		try {
+			return jdbcTemplate.query(Query.GETALLHOTELS, new HotelMapper());
+		} catch (Exception e) {
+			logger.error("Error getting all hotels", e);
+		}
+		return new ArrayList<>();
 	}
 
 	@Override
-	public boolean removeRoomFromHotel(int hotelId, int roomId) {
+	public List<Room> getAllRoomsInHotel(int hotelId) {
+		try {
+			return jdbcTemplate.query(Query.GETALLROOMSINHOTEL, new Object[] { hotelId }, new RoomMapper());
+		} catch (Exception e) {
+			logger.error("Cannot get rooms in hotel with id " + hotelId, e);
+		}
+		return new ArrayList<>();
+	}
+
+	@Override
+	public int getAvailableCount(int hotelId) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
+	}
+
+	@Override
+	public List<Room> getAvailableRooms(int hotelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Hotel getHotelDetails(int hotelId) {
+		try {
+			logger.info("getting hotel with id " + hotelId);
+			return jdbcTemplate.queryForObject(Query.GETHOTELDETAILS, new Object[] { hotelId }, new HotelMapper());
+		} catch (Exception e) {
+			logger.error("Error getting details of hotel id " + hotelId, e);
+		}
+		return null;
+	}
+
+	@Override
+	public List<Hotel> getHotelsInCity(int cityId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public boolean removeHotel(int hotelId) {
-		String removeHotel = "DELETE FROM HOTEL WHERE HOTEL_ID = ?";
 		int affectedRows;
 		try {
-			affectedRows = jdbcTemplate.update(removeHotel, hotelId);
+			affectedRows = jdbcTemplate.update(Query.REMOVEHOTEL, hotelId);
 		} catch (Exception e) {
 			logger.error("Error deleting hotel with id " + hotelId, e);
 			affectedRows = 0;
@@ -64,25 +97,8 @@ public class HotelDaoImpl implements HotelDao {
 	}
 
 	@Override
-	public List<Hotel> getAllHotels() {
-		String getAllHotels = "SELECT * FROM HOTEL";
-		try {
-			return jdbcTemplate.query(getAllHotels, new HotelMapper());
-		} catch (Exception e) {
-			logger.error("Error getting all hotels", e);
-		}
-		return new ArrayList<>();
-	}
-
-	@Override
-	public Hotel getHotelDetails(int hotelId) {
-		String getHotelDetails = "SELECT * FROM HOTEL WHERE HOTEL_ID = ?";
-		try {
-			return jdbcTemplate.queryForObject(getHotelDetails, new Object[] { hotelId }, new HotelMapper());
-		} catch (Exception e) {
-			logger.error("Error getting details of hotel id " + hotelId, e);
-		}
-		return null;
+	public void setDataSource(DataSource dataSource) {
+		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 }

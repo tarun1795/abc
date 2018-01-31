@@ -9,18 +9,22 @@ import com.accolite.sleeppods.model.Room;
 
 public interface HotelDao {
 
-	public void setDataSource(DataSource dataSource);
-
 	public boolean addNewHotel(Hotel hotel);
-
-	public boolean addNewRoomToHotel(int hotelId, Room room);
-
-	public boolean removeRoomFromHotel(int hotelId, int roomId);
 
 	public List<Hotel> getAllHotels();
 
+	public List<Room> getAllRoomsInHotel(int hotelId);
+
+	public int getAvailableCount(int hotelId);
+
+	public List<Room> getAvailableRooms(int hotelId);
+
 	public Hotel getHotelDetails(int hotelId);
 
+	public List<Hotel> getHotelsInCity(int cityId);
+
 	public boolean removeHotel(int hotelId);
+
+	public void setDataSource(DataSource dataSource);
 
 }

@@ -23,52 +23,52 @@ public class CrewMember {
 		this.crewType = crewType;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public CrewType getCrewType() {
+		return crewType;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public CrewType getCrewType() {
-		return crewType;
+	public boolean isEnabled() {
+		return isEnabled;
 	}
 
 	public void setCrewType(CrewType crewType) {
 		this.crewType = crewType;
 	}
 
-	public boolean isEnabled() {
-		return isEnabled;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setEnabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	@Override

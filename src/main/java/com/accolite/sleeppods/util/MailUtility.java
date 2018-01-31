@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailUtility {
 
+	private static final Logger logger = Logger.getLogger(MailUtility.class);
+
 	@Autowired
 	JavaMailSender mailSender;
-
-	private static final Logger logger = Logger.getLogger(MailUtility.class);
 
 	@Async
 	public void sendEmailAsync(String to, String subject, String text) {
