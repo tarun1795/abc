@@ -7,11 +7,13 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.accolite.sleeppods.dao.AdminActionsDao;
 import com.accolite.sleeppods.mapper.CityMapper;
 import com.accolite.sleeppods.model.City;
 import com.accolite.sleeppods.util.Query;
+
 
 public class AdminActionsDaoImpl implements AdminActionsDao {
 

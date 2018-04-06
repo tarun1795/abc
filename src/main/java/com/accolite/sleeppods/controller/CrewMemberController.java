@@ -69,13 +69,13 @@ public class CrewMemberController {
 		return members;
 	}
 	
-	@GetMapping("{memberId}")
-	public CrewMember getCrewDetails(@PathVariable int memberId) {
-		CrewMember member = crewMemberDao.getCrewDetails(memberId);
-		if(member == null) {
-			throw new BadRequestException("Error getting details of crew member with id "+memberId);
+	@GetMapping("{emailId}/")
+	public CrewMember getCrewDetails(@PathVariable String emailId) {
+		CrewMember member = crewMemberDao.getCrewDetails(emailId);
+		if(member == null || !member.isEnabled()) {
+			throw new BadRequestException("Error getting details of crew member with id "+emailId);
 		}
-		logger.info("Returning details of crew member with id "+memberId);
+		logger.info("Returning details of crew member with id "+emailId);
 		return member;
 	}
 	

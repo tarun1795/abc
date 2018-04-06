@@ -1,5 +1,7 @@
 package com.accolite.sleeppods.dao;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -17,7 +19,7 @@ public interface HotelDao {
 
 	public int getAvailableCount(int hotelId);
 
-	public List<Room> getAvailableRooms(int hotelId);
+	public List<Room> getAvailableRooms(int hotelId, Timestamp checkin, Timestamp checkout);
 
 	public Hotel getHotelDetails(int hotelId);
 
@@ -26,5 +28,7 @@ public interface HotelDao {
 	public boolean removeHotel(int hotelId);
 
 	public void setDataSource(DataSource dataSource);
+	
+	public List<Hotel> getHotesNearBy(double lat, double lng, Date checkin, Date checkout);
 
 }

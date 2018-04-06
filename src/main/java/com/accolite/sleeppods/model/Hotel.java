@@ -1,5 +1,7 @@
 package com.accolite.sleeppods.model;
 
+import java.util.List;
+
 public class Hotel {
 
 	private int id;
@@ -9,6 +11,7 @@ public class Hotel {
 	private double lat;
 	private double lng;
 	private int cityId;
+	private List<Room> rooms;
 
 	public Hotel() {
 		super();
@@ -79,5 +82,20 @@ public class Hotel {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	public List<Room> getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(List<Room> rooms) {
+		this.rooms = rooms;
+	}
+
+	@Override
+	public String toString() {
+		return "Hotel [id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + ", lat=" + lat
+				+ ", lng=" + lng + ", cityId=" + cityId + ", rooms=" + rooms + "]";
+	}
+ 
 
 }

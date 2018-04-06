@@ -39,6 +39,7 @@ public class AdminController {
 		if (cities.isEmpty()) {
 			throw new BadRequestException("Cannot get all cities");
 		}
+		logger.info("Getting all cities list");
 		return cities;
 	}
 

@@ -7,15 +7,18 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.accolite.sleeppods.dao.CrewMemberDao;
 import com.accolite.sleeppods.mapper.CrewMemberMapper;
 import com.accolite.sleeppods.model.CrewMember;
 import com.accolite.sleeppods.util.Query;
 
+
 public class CrewMemberDaoImpl implements CrewMemberDao {
 
 	private final Logger logger = Logger.getLogger(CrewMemberDaoImpl.class);
+	
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
@@ -67,11 +70,11 @@ public class CrewMemberDaoImpl implements CrewMemberDao {
 	}
 
 	@Override
-	public CrewMember getCrewDetails(int memberId) {
+	public CrewMember getCrewDetails(String emailId) {
 		try {
-			return jdbcTemplate.queryForObject(Query.GETCREWDETAILS, new Object[] { memberId }, new CrewMemberMapper());
+			return jdbcTemplate.queryForObject(Query.GETCREWDETAILS, new Object[] { emailId }, new CrewMemberMapper());
 		} catch (Exception e) {
-			logger.error("Error getting crew member with id " + memberId, e);
+			logger.error("Error getting crew member with id " + emailId, e);
 		}
 		return null;
 	}

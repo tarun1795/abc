@@ -4,10 +4,12 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.accolite.sleeppods.dao.RoomDao;
 import com.accolite.sleeppods.model.Room;
 import com.accolite.sleeppods.util.Query;
+
 
 public class RoomDaoImpl implements RoomDao {
 

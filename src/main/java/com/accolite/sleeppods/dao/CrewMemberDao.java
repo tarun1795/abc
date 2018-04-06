@@ -12,7 +12,7 @@ public interface CrewMemberDao {
 	public boolean disableCrewMember(int memberId);
 	public boolean enableCrewMember(int memberId);
 	public List<CrewMember> getAllCrewMembers();
-	public CrewMember getCrewDetails(int memberId);
+	public CrewMember getCrewDetails(String emailId);
 	public boolean removeCrewMember(int memberId);
 	public void setDataSource(DataSource dataSource);
 }

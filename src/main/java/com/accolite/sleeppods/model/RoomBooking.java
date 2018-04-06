@@ -8,22 +8,32 @@ public class RoomBooking {
 
 	int crewId;
 	int roomId;
-	Timestamp checkin;
-	Timestamp checkout;
+	int bookingId;
+	long checkin;
+	long checkout;
 	Timestamp bookingTime;
 	BookingStatus status;
-	
+	Hotel hotel;
+	String roomNumber; 
+
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+
+	public String getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(String roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+
 	public RoomBooking() {
 		super();
-	}	
-
-	public RoomBooking(int roomId, Timestamp checkin, Timestamp checkout, Timestamp bookingTime, BookingStatus status) {
-		super();
-		this.roomId = roomId;
-		this.checkin = checkin;
-		this.checkout = checkout;
-		this.bookingTime = bookingTime;
-		this.status = status;
 	}
 
 	public int getCrewId() {
@@ -42,19 +52,19 @@ public class RoomBooking {
 		this.roomId = roomId;
 	}
 
-	public Timestamp getCheckin() {
+	public long getCheckin() {
 		return checkin;
 	}
 
-	public void setCheckin(Timestamp checkin) {
+	public void setCheckin(long checkin) {
 		this.checkin = checkin;
 	}
 
-	public Timestamp getCheckout() {
+	public long getCheckout() {
 		return checkout;
 	}
 
-	public void setCheckout(Timestamp checkout) {
+	public void setCheckout(long checkout) {
 		this.checkout = checkout;
 	}
 
@@ -73,5 +83,19 @@ public class RoomBooking {
 	public void setStatus(BookingStatus status) {
 		this.status = status;
 	}
-	
+
+	public int getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
+	}
+
+	@Override
+	public String toString() {
+		return "RoomBooking [crewId=" + crewId + ", roomId=" + roomId + ", bookingId=" + bookingId + ", checkin="
+				+ checkin + ", checkout=" + checkout + ", bookingTime=" + bookingTime + ", status=" + status + "]";
+	}
+
 }
